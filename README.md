@@ -24,6 +24,10 @@ An application that provides a means of communication between a publisher and it
 - Run `psql -U <username> -d <myDataBase> -a -f pubsub.sql` and input password when prompted to migrate the database schema
 - run `npm run dev`
 
+### Run test with docker
+- run `docker-compose -p tests run -p 3000 --rm web npm run test`
+- run `docker-compose down`
+
 ### API Endpoints
 
 * Subscribe to a topic      - POST `subscribe/:topic`

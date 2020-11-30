@@ -12,6 +12,7 @@ CREATE TABLE topics (
 	created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+DROP TABLE IF EXISTS subscribers;
 CREATE TABLE subscribers (
 	id serial,
 	callback_url VARCHAR (100) UNIQUE NOT NULL,
@@ -34,9 +35,10 @@ CREATE TABLE my_subscriptions (
     last_updated TIMESTAMP
 );
 
+DROP TABLE IF EXISTS updates;
 CREATE TABLE updates (
 	id serial PRIMARY KEY,
-	topic_name text UNIQUE NOT NULL,
+	topic_name text NOT NULL,
 	message text,
 	created_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

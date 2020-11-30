@@ -15,13 +15,6 @@ exports.subscribe = async (req, res ) => {
     });
   }
 
-  if(topic.trim() === '') {
-    return res.status(400).json({
-      success: false,
-      message: 'Topic must not be empty',
-    });
-  }
-
   // remove params and query strings from URL
   const urlWithoutParams = callbackUrl.match('^(?:\\/\\/|[^\\/]+)*')[0];
 

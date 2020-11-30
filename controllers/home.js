@@ -46,7 +46,7 @@ exports.subscriberVerification = async (req, res) => {
         challenge: requestChallenge
       });
     } else {
-      return res.status(404);
+      return res.status(404).json({success: false});
     }
 
 
@@ -78,7 +78,7 @@ exports.subscriptionVerified = async (req, res) => {
       'UPDATE my_subscriptions SET status = $1 WHERE topic_name = $2', [subscription_status, topic]
     );
 
-    return res.status(200);
+    return res.status(200).json({success: true});;
 
   }
   catch(e) {
