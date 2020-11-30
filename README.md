@@ -24,6 +24,13 @@ An application that provides a means of communication between a publisher and it
 - Run `psql -U <username> -d <myDataBase> -a -f pubsub.sql` and input password when prompted to migrate the database schema
 - run `npm run dev`
 
+### Run app
+- run `curl -X POST -d '{"url": "http://localhost:8000/event"}' -H 'Content-Type: application/json
+       ' http://localhost:8000/subscribe/topic2` to subscribe
+- run `curl -X POST -H "Content-Type: application/json" -d '{"message": "hello"}' http://localhost:8000/publish/topic1` 
+to publish a new update
+- run `curl -X GET 'http://localhost:8000/event'` to view updates received
+
 ### Run test with docker
 - run `docker-compose -p tests run -p 3000 --rm web npm run test`
 - run `docker-compose down`
