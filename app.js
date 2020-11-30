@@ -20,7 +20,6 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -39,10 +38,6 @@ app.listen(port, () => {
 })
 
 const redis = require("redis");
-// const client = redis.createClient(6379, 'redis')
-// const client = redis.createClient();
-// const client = redis.createClient('redis:6379');
-// const client = redis.createClient({host: process.env.REDIS_HOST || '127.0.0.1'});
 const client = redis.createClient(process.env.REDIS_URL);
 
 module.exports = app;

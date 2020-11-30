@@ -2,12 +2,6 @@ const {addJobToVerifySubscriberIntent} = require('../task');
 const {isValidUrl} = require('../utils');
 const {db} = require('../database');
 
-/*
-* @parameters callbackUrl - The URL at which a subscriber wishes to receive content distribution requests
-* mode String - can have a value of either 'subscribe or 'unsubscribe
-* topic String - The unit to which one can subscribe to changes.
-* */
-// route /subscribe POST
 
 exports.subscribe = async (req, res ) => {
   const { topic } = req.params;
@@ -44,10 +38,7 @@ exports.subscribe = async (req, res ) => {
         message: 'Subscription already exist',
       });
     } else {
-      // await db.none(
-      //   'INSERT INTO my_subscriptions(topic_name, status) VALUES($1, $2)',
-      //   [topic, 'pending']
-      // )
+
       await db.none(
         'INSERT INTO my_subscriptions(topic_name, status) VALUES($1, $2) ON CONFLICT (topic_name) DO UPDATE SET status = ($2)',
         [topic, 'pending']
@@ -82,7 +73,6 @@ exports.subscribe = async (req, res ) => {
     });
   }
 
-  // extra TODO: Hubs MUST ignore additional request parameters they do not understand.
 }
 
 

@@ -1,5 +1,3 @@
-// const url = require('url');
-
 exports.isValidUrl = (url) => {
   try {
     new URL(url);

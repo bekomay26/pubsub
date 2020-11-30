@@ -38,16 +38,8 @@ exports.subscriberVerification = async (req, res) => {
   try {
     const {mode, topic, challenge: requestChallenge} = req.query;
 
-
-    // const pendingSubscriptionExists =
-    //   await db.any('SELECT exists (SELECT 1 FROM my_subscriptions WHERE topic_name = $1 AND status = $2 AND status = $3 LIMIT 1)', [topic, 'pending', mode]);
-
-
     const pendingSubscriptionExists =
       await db.any('SELECT exists (SELECT 1 FROM my_subscriptions WHERE topic_name = $1 AND status = $2 LIMIT 1)', [topic, 'pending']);
-
-    // const pendingSubscriptionExists =
-    //   await db.any('SELECT 1 FROM my_subscriptions WHERE topic_name = $1 AND status = $2 LIMIT 1', [topic, 'pending']);
 
     if (pendingSubscriptionExists[0].exists) {
       return res.status(202).json({
@@ -63,7 +55,6 @@ exports.subscriberVerification = async (req, res) => {
     return res.status(500).json({
       success: 'error',
       message: e.message,
-      // e,
     });
   }
 
@@ -83,7 +74,6 @@ exports.subscriptionVerified = async (req, res) => {
 
     const subscription_status = status === 'ACCEPTED' ? 'success' : 'failed';
 
-    console.log('fdgfg')
     await db.none(
       'UPDATE my_subscriptions SET status = $1 WHERE topic_name = $2', [subscription_status, topic]
     );
